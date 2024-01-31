@@ -18,8 +18,8 @@ The project is built using Django, a high-level Python web framework. It impleme
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/library-management-system.git
-   cd library-management-system
+   git clone git@github.com:shahpankaj123/LMS_API.git
+   cd LMS_API
    ```
 
 2. Create and activate a virtual environment:
