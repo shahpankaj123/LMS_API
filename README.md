@@ -24,7 +24,7 @@ The project is built using Django, a high-level Python web framework. It impleme
 
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate.bat if using cmd else .ps1`
    ```
 
 3. Install dependencies:
