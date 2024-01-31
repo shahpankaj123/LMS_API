@@ -5,9 +5,11 @@ from .models import Book,BookDetails,BorrowedBooks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .serializer import AddBookSerializer,BookSerializer,BookDetailsSerializer,BorrowedBooksSerializer,ReturnBookSerializer,BorrowedBooksListSerializer
 
 class AddBookView(APIView):
+    permission_classes=[IsAuthenticated]
     def post(self, request, format=None):
         serializer = AddBookSerializer(data=request.data)
         if serializer.is_valid():
@@ -32,18 +34,21 @@ class AddBookView(APIView):
 
 
 class ListAllBooksView(APIView):
+    permission_classes=[IsAuthenticated]
     def get(self, request, format=None):
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class GetBookByIDView(APIView):
+    permission_classes=[IsAuthenticated]
     def get(self, request, book_id, format=None):
         book = get_object_or_404(Book, book_id=book_id)
         serializer = BookSerializer(book)
         return Response(serializer.data, status=status.HTTP_200_OK)    
     
 class AssignUpdateBookDetailsView(APIView):
+    permission_classes=[IsAuthenticated]
     def post(self, request, book_id, format=None):
         book = get_object_or_404(Book, book_id=book_id)
         book_details_data = request.data.get('book_details', {})
@@ -62,6 +67,7 @@ class AssignUpdateBookDetailsView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
 
 class BorrowBookView(APIView):
+    permission_classes=[IsAuthenticated]
     def post(self, request, book_id, user_id, format=None):
         book = get_object_or_404(Book, book_id=book_id)
         user = get_object_or_404(User, id=user_id)
@@ -82,6 +88,7 @@ class BorrowBookView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
 
 class ReturnBookView(APIView):
+    permission_classes=[IsAuthenticated]
     def put(self, request, borrowed_books_id, format=None):
         borrowed_book = get_object_or_404(BorrowedBooks, id=borrowed_books_id)
         serializer = ReturnBookSerializer(borrowed_book, data=request.data, partial=True)
@@ -93,6 +100,7 @@ class ReturnBookView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ListAllBorrowedBooksView(APIView):
+    permission_classes=[IsAuthenticated]
     def get(self, request, format=None):
         borrowed_books = BorrowedBooks.objects.all()
         serializer = BorrowedBooksListSerializer(borrowed_books, many=True)
