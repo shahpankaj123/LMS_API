@@ -52,6 +52,7 @@ The database schema includes the following models:
 1. **User Model:**
    - Attributes: UserID, Name, Email, MembershipDate
    - Relationships: 1-M with BorrowedBooks
+   - Used Jwt Authentication
 
 2. **Book Model:**
    - Attributes: BookID, Title, ISBN, PublishedDate, Genre
