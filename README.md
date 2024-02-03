@@ -44,7 +44,10 @@ The project is built using Django, a high-level Python web framework. It impleme
    ```bash
    python manage.py runserver
    ```
-
+   
+## JWT Authentication
+   JWT (JSON Web Token) authentication is used to secure API endpoints. 
+   
 ## Database Schema Design
 
 The database schema includes the following models:
